@@ -1,18 +1,17 @@
 #!/bin/bash
 
-# Define client IP addresses
-WORKERS=("ec2-98-81-137-231.compute-1.amazonaws.com"
-"ec2-18-207-128-217.compute-1.amazonaws.com"
-"ec2-54-81-142-216.compute-1.amazonaws.com"
-"ec2-54-152-190-58.compute-1.amazonaws.com"
-"ec2-3-88-175-79.compute-1.amazonaws.com"
-"ec2-54-226-83-135.compute-1.amazonaws.com"
-"ec2-34-234-86-36.compute-1.amazonaws.com"
-"ec2-54-172-98-244.compute-1.amazonaws.com")
+# Define worker DNS addresses
+WORKERS=("ec2-54-82-36-59.compute-1.amazonaws.com"
+"ec2-98-81-217-202.compute-1.amazonaws.com"
+"ec2-54-82-110-7.compute-1.amazonaws.com"
+"ec2-54-221-190-189.compute-1.amazonaws.com"
+"ec2-107-23-142-66.compute-1.amazonaws.com"
+"ec2-98-81-84-106.compute-1.amazonaws.com"
+"ec2-50-17-26-8.compute-1.amazonaws.com"
+"ec2-54-159-54-183.compute-1.amazonaws.com")
 
-# Loop through each client and execute the iperf command
-for CLIENT in "${WORKERS[@]}"; do
-    #echo $CLIENT
-    ssh -i "Cloud_course.pem" -o StrictHostKeyChecking=no ubuntu@$WORKERS 'bash -s' < ./worker_bootstrapper.sh &
+# Loop through each worker and bootstrap
+for WORKER in "${WORKERS[@]}"; do
+    ssh -i "Cloud_course.pem" -o StrictHostKeyChecking=no ubuntu@$WORKER 'bash -s' < ./worker_bootstrapper.sh &
 done
 wait
