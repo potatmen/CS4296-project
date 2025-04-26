@@ -33,8 +33,8 @@ def find_primes():
             primes.append(number)
     t1 = time.time()
     
-    with open('primes_result.json', 'a') as f:
-        f.write(json.dumps(primes) + '\n')
+    #with open('primes_result.json', 'a') as f:
+    #    f.write(json.dumps(primes) + '\n')
         
     return jsonify({
         "start": t0,
